@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Railway Reservation</title>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+	<link href="{{ url_for('static', filename='css/jquery.toast.css') }}" rel="stylesheet" type="text/css" />
+	<script src="{{ url_for('static', filename='css/jquery.min.js') }}">
+	</script>
+	<script src="{{ url_for('static', filename='css/jquery.toast.js') }}">
+	</script>
+</head>
+
+<body class = 'index_body'>
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<form method="POST" action="/search">
+							<div class="row center_row">
+                                <div class="form-group">
+                                    <span class="form-label">PNR Number</span>
+                                    <input class="form-control" name="pnr" type="text" placeholder="PNR Number..."
+                                        id="pnr" for="pnr">
+                                </div>
+							</div>
+							<div class="form-btn">
+								<button class="submit-btn">Check Now</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(".submit-btn").click(function (e) {
+			e.preventDefault();
+			if (!$('#pnr').val()) { $.toast({
+					text: "All Fields are Required", // Text that is to be shown in the toast
+					heading: 'Notification', // Optional heading to be shown on the toast
+					icon: "error", // Type of toast icon
+					showHideTransition: 'fade', // fade, slide or plain
+					allowToastClose: true, // Boolean value true or false
+					hideAfter: 15000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+					stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+					position: 'bottom-left', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+					textAlign: 'left', // Text alignment i.e. left, right or center
+					loader: true, // Whether to show loader or not. True by default
+					loaderBg: '#426184', // Background color of the toast loader
+				})}
+			else {
+				$("form").submit();
+			}
+		});
+	});
+	if ("{{response}}") {
+		$.toast({
+			text: "{{ response }}", // Text that is to be shown in the toast
+			heading: 'Notification', // Optional heading to be shown on the toast
+			icon: "success", // Type of toast icon
+			showHideTransition: 'fade', // fade, slide or plain
+			allowToastClose: true, // Boolean value true or false
+			hideAfter: 15000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+			stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+			position: 'bottom-left', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+			textAlign: 'left', // Text alignment i.e. left, right or center
+			loader: true, // Whether to show loader or not. True by default
+			loaderBg: '#426184', // Background color of the toast loader
+		});
+	}
+</script>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Railway Reservation</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link href="{{ url_for('static', filename='css/jquery.toast.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ url_for('static', filename='css/jquery.min.js') }}">
+    </script>
+    <script src="{{ url_for('static', filename='css/jquery.toast.js') }}">
+    </script>
+</head>
+
+<body class='index_body'>
+    <div class="display_section">
+        {% for ele in resp %}
+            <div class="new-container booking-form">
+                <div class="ticket">
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">PNR Number </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.pnr }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">Name </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.fname }} {{ ele.lname }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">From </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.from1 }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">To </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.to1 }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">Departing </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.date }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">Adult Count</h1> 
+                        <h1 class = "block_ele output_block">{{ ele.type }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">Children Count</h1> 
+                        <h1 class = "block_ele output_block">{{ ele.count }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">Class </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.class1 }}</h2> 
+                    </div>
+                    <div class = "ticket_row row">
+                        <h1 class = "block_ele">Email </h1> 
+                        <h1 class = "block_ele output_block">{{ ele.email }}</h2> 
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".submit-btn").click(function (e) {
+            e.preventDefault();
+            if (!$('#fname').val() || !$('#lname').val() || !$('#from1').val() || !$('#to1').val() || !$(
+                '#date').val() || !$('#type1').val() || !$('#count').val() || !$('#class1').val() || !
+                $('#email').val() || !$('#tel').val() || !$('#payment').val()) {
+                $.toast({
+                    text: "All Fields are Required", // Text that is to be shown in the toast
+                    heading: 'Notification', // Optional heading to be shown on the toast
+                    icon: "error", // Type of toast icon
+                    showHideTransition: 'fade', // fade, slide or plain
+                    allowToastClose: true, // Boolean value true or false
+                    hideAfter: 15000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                    stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                    position: 'bottom-left', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+                    textAlign: 'left', // Text alignment i.e. left, right or center
+                    loader: true, // Whether to show loader or not. True by default
+                    loaderBg: '#426184', // Background color of the toast loader
+                });
+            } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('#email').val()))) {
+                $.toast({
+                    text: 'Email Id is not valid', // Text that is to be shown in the toast
+                    heading: 'Notification', // Optional heading to be shown on the toast
+                    icon: "error", // Type of toast icon
+                    showHideTransition: 'fade', // fade, slide or plain
+                    allowToastClose: true, // Boolean value true or false
+                    hideAfter: 15000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                    stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                    position: 'bottom-left', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+                    textAlign: 'left', // Text alignment i.e. left, right or center
+                    loader: true, // Whether to show loader or not. True by default
+                    loaderBg: '#426184', // Background color of the toast loader
+                });
+                return false;
+            } else if (!(/^\d{10}$/.test($('#tel').val()))) {
+                $.toast({
+                    text: "Phone Number is not valid", // Text that is to be shown in the toast
+                    heading: 'Notification', // Optional heading to be shown on the toast
+                    icon: "error", // Type of toast icon
+                    showHideTransition: 'fade', // fade, slide or plain
+                    allowToastClose: true, // Boolean value true or false
+                    hideAfter: 15000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+                    stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+                    position: 'bottom-left', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+                    textAlign: 'left', // Text alignment i.e. left, right or center
+                    loader: true, // Whether to show loader or not. True by default
+                    loaderBg: '#426184', // Background color of the toast loader
+                });
+                return false;
+            } else {
+                $("form").submit();
+            }
+        });
+    });
+    if ("{{response}}") {
+        $.toast({
+            text: "{{ response }}", // Text that is to be shown in the toast
+            heading: 'Notification', // Optional heading to be shown on the toast
+            icon: "success", // Type of toast icon
+            showHideTransition: 'fade', // fade, slide or plain
+            allowToastClose: true, // Boolean value true or false
+            hideAfter: 15000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+            stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+            position: 'bottom-left', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+            textAlign: 'left', // Text alignment i.e. left, right or center
+            loader: true, // Whether to show loader or not. True by default
+            loaderBg: '#426184', // Background color of the toast loader
+        });
+    }
+</script>
+
+</html>
