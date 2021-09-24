@@ -1,2 +1,2 @@
 # Simple_Ticket_Booking_Simulation
-"DBMS WORK"
+  - Simple Ticket booking and cancelation system
